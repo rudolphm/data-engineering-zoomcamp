@@ -6,11 +6,11 @@ import time
 
 
 #Change this to your bucket name
-BUCKET_NAME = "dezoomcamp_hw3_2025"  
+BUCKET_NAME = "testapp-lakehouse-raw"  
 
 #If you authenticated through the GCP SDK you can comment out these two lines
-CREDENTIALS_FILE = "gcs.json"  
-client = storage.Client.from_service_account_json(CREDENTIALS_FILE)
+# CREDENTIALS_FILE = "gcs.json"  
+client = storage.Client()
 
 
 BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-"
@@ -43,7 +43,7 @@ def verify_gcs_upload(blob_name):
 
 
 def upload_to_gcs(file_path, max_retries=3):
-    blob_name = os.path.basename(file_path)
+    blob_name = f"hw/{os.path.basename(file_path)}"
     blob = bucket.blob(blob_name)
     blob.chunk_size = CHUNK_SIZE  
     
