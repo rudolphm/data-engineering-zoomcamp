@@ -2,14 +2,16 @@ version: 2
 
 sources:
   - name: staging
-    database: "{{ env_var('DBT_DATABASE', 'taxi-rides-ny-339813-412521') }}"
-    schema: "{{ env_var('DBT_SCHEMA', 'trips_data_all') }}"
+    database: "{{ env_var('DBT_DATABASE', 'testapp-f6b75') }}"
+    schema:
+      "{{ env_var('DBT_SCHEMA', 'zoomcamp') }}"
       # loaded_at_field: record_loaded_at
     tables:
       - name: green_tripdata
-      - name: yellow_tripdata
-         # freshness:
-           # error_after: {count: 6, period: hour}
+      - name:
+          yellow_tripdata
+          # freshness:
+          # error_after: {count: 6, period: hour}
 
 models:
     - name: stg_green_tripdata
